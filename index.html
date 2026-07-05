@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChronoTask - Premium Productivity Suite</title>
+    <!-- Google Fonts & FontAwesome Premium Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Decorative ambient backgrounds -->
+    <div class="ambient-blob blob-left"></div>
+    <div class="ambient-blob blob-right"></div>
+
+    <main class="todo-card">
+        <!-- App Header Section -->
+        <header class="app-header">
+            <div class="header-main">
+                <h1>ChronoTask</h1>
+                <span id="taskCounter" class="counter-badge">0 Tasks</span>
+            </div>
+            <p class="subtitle">Streamline your daily execution matrix</p>
+        </header>
+
+        <!-- Task Input Architecture -->
+        <section class="input-form-container">
+            <div class="input-row">
+                <input type="text" id="taskTitleInput" class="custom-input" placeholder="What needs to be accomplished?">
+            </div>
+            <div class="meta-row">
+                <div class="datetime-wrapper">
+                    <i class="fa-regular fa-calendar-clock date-icon"></i>
+                    <input type="datetime-local" id="taskDateTimeInput" class="custom-datetime">
+                </div>
+                <button id="addTaskBtn" class="add-btn">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Add Task</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Task Distribution / List Section -->
+        <section class="tasks-wrapper">
+            <ul id="taskList" class="task-list">
+                <!-- JavaScript will inject modular list items here -->
+            </ul>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

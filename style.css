@@ -1,0 +1,276 @@
+:root {
+    --bg-base: #080b11;
+    --card-glass: rgba(15, 22, 38, 0.7);
+    --border-glass: rgba(255, 255, 255, 0.06);
+    --accent-indigo: #6366f1;
+    --text-primary: #f8fafc;
+    --text-muted: #64748b;
+    --success-green: #10b981;
+    --danger-red: #f43f5e;
+    --font-stack: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: var(--font-stack);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Background Blurs */
+.ambient-blob {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.12;
+    z-index: -1;
+}
+.blob-left { background: var(--accent-indigo); top: -10%; left: -5%; }
+.blob-right { background: #3b82f6; bottom: -10%; right: -5%; }
+
+/* Glass Card Layout */
+.todo-card {
+    background: var(--card-glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-glass);
+    border-radius: 28px;
+    width: 100%;
+    max-width: 540px;
+    padding: 40px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.app-header {
+    margin-bottom: 32px;
+}
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.counter-badge {
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    color: #a5b4fc;
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+.subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Input Forms Styles */
+.input-form-container {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-glass);
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 32px;
+}
+.custom-input {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-glass);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-family: var(--font-stack);
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.2s;
+}
+.custom-input:focus {
+    border-color: var(--accent-indigo);
+    background: rgba(255, 255, 255, 0.04);
+}
+.meta-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 14px;
+}
+.datetime-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.date-icon {
+    position: absolute;
+    left: 14px;
+    color: var(--text-muted);
+    pointer-events: none;
+    font-size: 0.95rem;
+}
+.custom-datetime {
+    width: 100%;
+    padding: 14px 14px 14px 40px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-glass);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-family: var(--font-stack);
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+}
+.custom-datetime::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+.add-btn {
+    padding: 0 24px;
+    background: linear-gradient(135deg, var(--accent-indigo) 0%, #4f46e5 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 700;
+    font-family: var(--font-stack);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+}
+.add-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(99, 102, 241, 0.35);
+}
+
+/* Task List Display Layers */
+.tasks-wrapper {
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+.tasks-wrapper::-webkit-scrollbar { width: 5px; }
+.tasks-wrapper::-webkit-scrollbar-thumb { background: var(--border-glass); border-radius: 99px; }
+
+.task-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.task-item {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid var(--border-glass);
+    padding: 16px 20px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    transition: all 0.25s ease;
+}
+.task-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+.task-left-block {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+}
+
+/* Checkbox Structuring */
+.check-trigger {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--text-muted);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: transparent;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+.task-item.completed .check-trigger {
+    background: var(--success-green);
+    border-color: var(--success-green);
+    color: white;
+}
+.task-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.task-text {
+    font-size: 0.98rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    word-break: break-word;
+}
+.task-item.completed .task-text {
+    color: var(--text-muted);
+    text-decoration: line-through;
+}
+.task-time-badge {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.task-time-badge i { font-size: 0.75rem; }
+
+/* Control Action Row */
+.action-row {
+    display: flex;
+    gap: 6px;
+}
+.icon-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--border-glass);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+.btn-edit:hover { color: var(--accent-indigo); background: rgba(99, 102, 241, 0.1); border-color: rgba(99, 102, 241, 0.2); }
+.btn-delete:hover { color: var(--danger-red); background: rgba(244, 63, 94, 0.1); border-color: rgba(244, 63, 94, 0.2); }
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
